@@ -21,11 +21,6 @@ public class Army implements Iterable<Warrior> {
         }
 
         @Override
-        public Army getArmy() {
-            return Army.this;
-        }
-
-        @Override
         public Warrior getWrapped() {
             return warrior;
         }
@@ -59,10 +54,6 @@ public class Army implements Iterable<Warrior> {
 
     private final Node head = new Node(null);
     private Node tail = head;
-
-    private Warrior peek() {
-        return head.next;
-    }
 
     public boolean isEmpty() {
         return tail == head;
@@ -101,9 +92,8 @@ public class Army implements Iterable<Warrior> {
         return this;
     }
 
-    public Army addSeducedUnit(Warrior warrior) {
+    public void addSeducedUnit(Warrior warrior) {
         addToTail(warrior);
-        return this;
     }
 
     public void removeSeducedUnit() {
@@ -129,6 +119,10 @@ public class Army implements Iterable<Warrior> {
             }
             var res = peek();
             return res == head ? null : res;
+        }
+
+        private Warrior peek() {
+            return head.next;
         }
     }
 

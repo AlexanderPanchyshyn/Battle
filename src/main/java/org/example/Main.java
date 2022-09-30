@@ -5,11 +5,9 @@ import org.example.game.*;
 
 public class Main {
     public static void main(String[] args) {
-        var army1 = new Army().addUnits(new Seducer()::clone, 1).addUnits(new Warrior()::clone, 1);
-        var army2 = new Army().addUnits(new Warrior()::clone, 1);
+        var army1 = new Army();
+        var army2 = new Army().addUnits(Lancer::new, 1).addUnits(Knight::new, 1).addUnits(Warrior::new, 4);
 
-        var res = Battle.fight(army1, army2);
-
-        System.out.println(res);
+        army1.addUnits(new Seducer(army1, army2), 1);
     }
 }

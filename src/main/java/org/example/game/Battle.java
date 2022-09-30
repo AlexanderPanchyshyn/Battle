@@ -1,13 +1,14 @@
 package org.example.game;
 
 public class Battle {
+    private Battle() {
+        throw new IllegalStateException("Utility class");
+    }
     public static boolean fight(Warrior warrior1, Warrior warrior2) {
         while(warrior1.isAlive() && warrior2.isAlive()) {
             warrior1.hit(warrior2);
-            System.out.println(warrior1.getHealth() + ":" + warrior2.getHealth());
             if (!warrior2.isAlive()) { break; }
             warrior2.hit(warrior1);
-            System.out.println(warrior1.getHealth() + ":" + warrior2.getHealth());
         }
         return warrior1.isAlive();
     }
