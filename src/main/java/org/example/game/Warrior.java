@@ -2,21 +2,28 @@ package org.example.game;
 
 
 public class Warrior implements Cloneable, HasHealth, HasStrength, CanReceiveDamage{
-    private static final int STRENGTH = 5;
+    private int strength;
     private int health;
-    private final int initialHealth;
+    private int initialHealth;
 
-    protected Warrior(int health) {
+    protected Warrior(int health, int strength) {
         initialHealth = this.health = health;
+        this.strength = strength;
     }
 
     public Warrior() {
-        this(50);
+        this(50, 5);
     }
+
     @Override
     public int getStrength() {
-        return STRENGTH;
+        return strength;
     }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
     @Override
     public int getHealth() {
         return health;
@@ -26,8 +33,23 @@ public class Warrior implements Cloneable, HasHealth, HasStrength, CanReceiveDam
         this.health = Math.min(initialHealth, health);
     }
 
+    public int getInitialHealth() {
+        return initialHealth;
+    }
+
+    protected void setInitialHealth(int initialHealth) {
+        this.initialHealth = initialHealth;
+    }
+
     public void receiveDamage(HasStrength damager) {
         setHealth(getHealth() - damager.getStrength());
+    }
+
+    public Warrior equipWeapon(Weapon weapon) {
+        setInitialHealth(Math.max(0, getInitialHealth() + weapon.getHealth()));
+        setHealth(Math.max(0, getHealth() + weapon.getHealth()));
+        setStrength(Math.max(0, getStrength() + weapon.getStrength()));
+        return this;
     }
 
     @Override

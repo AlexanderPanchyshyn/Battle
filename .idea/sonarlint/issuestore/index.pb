@@ -1,12 +1,6 @@
 
 Z
 *src/main/java/org/example/game/Damage.java,3\f\3ff2ffad4182c5901bf244bebca93b64fa0e47b7
-\
-,src/main/java/org/example/game/Defender.java,7\7\771cdb002c395e03f4cf80c1d45be9c6491beb73
-[
-+src/main/java/org/example/game/Vampire.java,6\5\65ec9605cafac060d68894c506558af34105fe6a
-Z
-*src/main/java/org/example/game/Knight.java,1\e\1e8cb6483b4c202eedbeb8e0f398b755eddbc4da
 d
 4src/main/java/org/example/game/KnowsDamageDealt.java,e\8\e8b54014ee6811c62a4575553243abc7f7b7dd47
 _
@@ -15,13 +9,7 @@ d
 4src/main/java/org/example/game/CanReceiveDamage.java,6\5\65cd22d5254fa83dca5263aec0549bde52c67767
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
-Z
-*src/main/java/org/example/game/Healer.java,7\1\7192017e8d57ef57398049cfc2b66e3cd19020d1
 ]
 -src/main/java/org/example/game/HasHealth.java,a\9\a9a360d0a80141458a94b7ea53c60734b42bcf50
-[
-+src/main/java/org/example/game/Warrior.java,b\7\b7c8d3f166be71fb1abbaeb810db798b2b317a1a
-Z
-*src/main/java/org/example/game/Lancer.java,3\5\3548f3cb4851039caa09437145f61d39dae07645
 `
 0src/main/java/org/example/game/SimpleDamage.java,6\3\63baaf40cdc286e3f6f0573d81510f60c134a7b9

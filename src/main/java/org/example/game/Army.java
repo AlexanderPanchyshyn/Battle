@@ -50,6 +50,8 @@ public class Army implements Iterable<Warrior> {
         public void receiveDamage(HasStrength damager) {
             warrior.receiveDamage(damager);
         }
+
+
     }
 
     private final Node head = new Node(null);

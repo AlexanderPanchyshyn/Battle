@@ -1,16 +1,24 @@
 package org.example.game;
 
 public class Defender extends Warrior{
-    private static final int STRENGTH = 3;
-    private static final int ARMOR = 2;
+    private int armor = 2;
+
     public Defender() {
-        super(60);
+        super(60, 3);
     }
-    public int getStrength() {
-        return STRENGTH;
+
+    public int getArmor() {
+        return armor;
     }
-    protected int getArmor() {
-        return ARMOR;
+
+    protected void setArmor(int armor) {
+        this.armor = armor;
+    }
+
+    @Override
+    public Warrior equipWeapon(Weapon weapon) {
+        setArmor(Math.max(0, getArmor() + weapon.getArmor()));
+        return super.equipWeapon(weapon);
     }
 
     @Override

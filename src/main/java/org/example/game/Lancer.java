@@ -1,12 +1,9 @@
 package org.example.game;
 
 public class Lancer extends Warrior implements KnowsDamageDealt {
-    private static final int STRENGTH = 6;
     private static final int PENETRATION = 50;
 
-    public int getStrength() {
-        return STRENGTH;
-    }
+    public Lancer() { super(50, 6); }
 
     @Override
     public void hit(CanReceiveDamage opponent) {

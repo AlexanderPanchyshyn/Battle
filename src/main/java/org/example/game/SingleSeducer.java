@@ -6,27 +6,22 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 public class SingleSeducer extends Warrior {
-    private static final int STRENGTH = 3;
     private static final int SEDUCE_VALUE = 10;
     private final Army myArmy;
     private final Army enemyArmy;
 
     public SingleSeducer() {
-        super(40);
+        super(40, 3);
         this.myArmy = null;
         this.enemyArmy = null;
     }
 
     public SingleSeducer(Army myArmy, Army enemyArmy){
-        super(40);
+        super(40, 3);
         this.myArmy = myArmy;
         this.enemyArmy = enemyArmy;
     }
 
-    @Override
-    public int getStrength() {
-        return STRENGTH;
-    }
     @SneakyThrows
     private boolean seduce(Army myArmy, Army enemyArmy) {
         Random random = SecureRandom.getInstanceStrong();
