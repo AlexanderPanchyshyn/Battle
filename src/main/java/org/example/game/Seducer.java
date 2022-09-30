@@ -12,8 +12,7 @@ public class Seducer implements Supplier<Warrior> {
         this.enemyArmy = enemyArmy;
     }
 
-
     public Warrior get() {
-        return new BasicSeducer(myArmy, enemyArmy);
+        return new SingleSeducer(myArmy, enemyArmy);
     }
 }

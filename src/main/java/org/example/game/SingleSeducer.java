@@ -5,13 +5,19 @@ import lombok.SneakyThrows;
 import java.security.SecureRandom;
 import java.util.Random;
 
-public class BasicSeducer extends Warrior {
+public class SingleSeducer extends Warrior {
     private static final int STRENGTH = 3;
     private static final int SEDUCE_VALUE = 10;
     private final Army myArmy;
     private final Army enemyArmy;
 
-    public BasicSeducer(Army myArmy, Army enemyArmy){
+    public SingleSeducer() {
+        super(40);
+        this.myArmy = null;
+        this.enemyArmy = null;
+    }
+
+    public SingleSeducer(Army myArmy, Army enemyArmy){
         super(40);
         this.myArmy = myArmy;
         this.enemyArmy = enemyArmy;

@@ -9,8 +9,6 @@ Z
 *src/main/java/org/example/game/Knight.java,1\e\1e8cb6483b4c202eedbeb8e0f398b755eddbc4da
 d
 4src/main/java/org/example/game/KnowsDamageDealt.java,e\8\e8b54014ee6811c62a4575553243abc7f7b7dd47
-^
-.src/test/java/org/example/game/BattleTest.java,4\0\4042c5fbf1fa54eef63f0b527940e86d48e116c8
 _
 /src/main/java/org/example/game/HasStrength.java,1\9\19917159517f433da543c276a8f8b05f620875ed
 d
