@@ -59,16 +59,6 @@ public class Army implements Iterable<Warrior> {
         return tail == head;
     }
 
-    private void removeFromHead() {
-        if (isEmpty()) {
-            throw new NoSuchElementException();
-        }
-        if (tail == head.next) {
-            tail = head;
-        }
-        head.next = head.next.next;
-    }
-
     public void removeDeadBodies() {
         var it = iterator();
         while (it.hasNext()) {
@@ -96,10 +86,6 @@ public class Army implements Iterable<Warrior> {
         addToTail(warrior);
     }
 
-    public void removeSeducedUnit() {
-        removeFromHead();
-    }
-
     public Iterator<Warrior> firstAlive() {
         return new FirstAliveIterator();
     }
@@ -123,6 +109,16 @@ public class Army implements Iterable<Warrior> {
 
         private Warrior peek() {
             return head.next;
+        }
+
+        private void removeFromHead() {
+            if (isEmpty()) {
+                throw new NoSuchElementException();
+            }
+            if (tail == head.next) {
+                tail = head;
+            }
+            head.next = head.next.next;
         }
     }
 

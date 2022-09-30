@@ -28,9 +28,7 @@ public class BasicSeducer extends Warrior {
 
         if (randomResult <= SEDUCE_VALUE){
             var it = enemyArmy.iterator();
-
             myArmy.addSeducedUnit(it.next().clone());
-            enemyArmy.removeSeducedUnit();
         }
 
         return randomResult <= SEDUCE_VALUE;
