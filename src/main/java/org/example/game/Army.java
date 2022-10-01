@@ -78,9 +78,23 @@ public class Army implements Iterable<Warrior> {
     }
 
     public Army addUnits(Supplier<Warrior> factory, int quantity) {
-        for(int i = 0; i < quantity; i++) {
+        for (int i = 0; i < quantity; i++) {
             addToTail(factory.get());
         }
+        return this;
+    }
+
+    public Army equipWarriorAtPosition(int position, Weapon weapon) {
+        int i = 0;
+        Node pos = head.next;
+
+        while (i < position) {
+            pos = pos.next;
+            i++;
+        }
+
+        pos.warrior.equipWeapon(weapon);
+
         return this;
     }
 

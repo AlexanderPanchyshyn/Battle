@@ -6,17 +6,20 @@ import org.example.game.*;
 
 public class Main {
     public static void main(String[] args) {
-        var army1 = new Army();
-        var army2 = new Army().addUnits(Lancer::new, 1).addUnits(Knight::new, 1).addUnits(Warrior::new, 4);
-        army1.addUnits(new Seducer(army1, army2), 1);
+        var army1 = new Army().addUnits(Warrior::new, 4);
+        var army2 = new Army().addUnits(Warrior::new, 4);
+        army2.equipWarriorAtPosition(1, Ammunition.Shield()).equipWarriorAtPosition(2, Ammunition.Katana()).equipWarriorAtPosition(2, Ammunition.Shield());
 
-        var war1 = new Defender();
-        System.out.printf("Initial health = %d, health = %d, strength = %d, armor = %d.%n", war1.getInitialHealth(), war1.getHealth(), war1.getStrength(), war1.getArmor());
-        war1.equipWeapon(Weapons.Katana()).equipWeapon(Weapons.Shield());
-        System.out.printf("Initial health = %d, health = %d, strength = %d, armor = %d.%n", war1.getInitialHealth(), war1.getHealth(), war1.getStrength(), war1.getArmor());
-
+        var war1 = new Warrior();
         var war2 = new Lancer();
+        System.out.printf("Initial health = %d, health = %d, strength = %d.%n", war1.getInitialHealth(), war1.getHealth(), war1.getStrength());
 
-        Battle.fight(war1, war2);
+        war1.equipWeapon(Ammunition.Katana()).equipWeapon(Ammunition.Shield());
+
+        System.out.printf("Initial health = %d, health = %d, strength = %d.%n", war1.getInitialHealth(), war1.getHealth(), war1.getStrength());
+
+
+
+        Battle.fight(army1, army2);
     }
 }

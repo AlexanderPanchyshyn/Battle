@@ -45,9 +45,14 @@ public class Warrior implements Cloneable, HasHealth, HasStrength, CanReceiveDam
         setHealth(getHealth() - damager.getStrength());
     }
 
+    protected int calculateBonus(int bonus) {
+        int res = 0;
+        return res + bonus;
+    }
+
     public Warrior equipWeapon(Weapon weapon) {
-        setInitialHealth(Math.max(0, getInitialHealth() + weapon.getHealth()));
-        setHealth(Math.max(0, getHealth() + weapon.getHealth()));
+        setInitialHealth(Math.max(1, getInitialHealth() + weapon.getHealth()));
+        setHealth(Math.max(1, getHealth() + weapon.getHealth()));
         setStrength(Math.max(0, getStrength() + weapon.getStrength()));
         return this;
     }

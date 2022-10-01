@@ -1,6 +1,6 @@
 package org.example.game;
 
-public interface Weapons {
+public interface Ammunition {
     static Weapon Sword() {
         return Weapon.builder().health(5).strength(2).build();
     }
