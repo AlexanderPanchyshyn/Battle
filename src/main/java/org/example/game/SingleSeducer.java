@@ -40,6 +40,7 @@ public class SingleSeducer extends Warrior {
         if (opponent instanceof WarriorInArmy enemy) {
             var attemptToSeduce = seduce(myArmy, enemyArmy);
             if (attemptToSeduce) {
+                System.out.println("Yes");
                 enemy.getWrapped().setHealth(0);
             } else {
                 super.hit(opponent);

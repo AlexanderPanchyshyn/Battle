@@ -17,8 +17,14 @@ public class Vampire extends Warrior implements KnowsDamageDealt {
 
     @Override
     public Warrior equipWeapon(Weapon weapon) {
-        setVampirism(Math.max(0, getVampirism() + weapon.getVampirism()));
+        weaponBuilder.addVampirism(weapon.getVampirism());
         return super.equipWeapon(weapon);
+    }
+
+    @Override
+    protected void onWeaponsEquipped(Weapon weapon) {
+        setVampirism(Math.max(0, getVampirism() + weapon.getVampirism()));
+        super.onWeaponsEquipped(weapon);
     }
 
     @Override

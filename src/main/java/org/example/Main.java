@@ -6,20 +6,20 @@ import org.example.game.*;
 
 public class Main {
     public static void main(String[] args) {
-        var army1 = new Army().addUnits(Warrior::new, 4);
-        var army2 = new Army().addUnits(Warrior::new, 4);
-        army2.equipWarriorAtPosition(1, Ammunition.Shield()).equipWarriorAtPosition(2, Ammunition.Katana()).equipWarriorAtPosition(2, Ammunition.Shield());
+//        var army1 = new Army();
+//        var army2 = new Army().addUnits(Warrior::new, 4);
+//
+//        army1.addUnits(new Seducer(army1, army2), 1);
+//        army2.equipWarriorAtPosition(0, Ammunition.Shield()).equipWarriorAtPosition(0, Ammunition.Katana());
+//
+//        Battle.fight(army1, army2);
 
-        var war1 = new Warrior();
-        var war2 = new Lancer();
-        System.out.printf("Initial health = %d, health = %d, strength = %d.%n", war1.getInitialHealth(), war1.getHealth(), war1.getStrength());
+        var war1 = new Defender();
+        var war2 = new Vampire();
 
-        war1.equipWeapon(Ammunition.Katana()).equipWeapon(Ammunition.Shield());
+        war1.equipWeapon(Ammunition.MagicWand()).equipWeapon(Ammunition.Shield()).prepareForBattle();
+        war2.equipWeapon(Ammunition.Katana()).equipWeapon(Ammunition.GreatAxe()).prepareForBattle();
 
-        System.out.printf("Initial health = %d, health = %d, strength = %d.%n", war1.getInitialHealth(), war1.getHealth(), war1.getStrength());
-
-
-
-        Battle.fight(army1, army2);
+        Battle.fight(war1, war2);
     }
 }

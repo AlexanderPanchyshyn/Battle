@@ -1,6 +1,6 @@
 package org.example.game;
 
-public class Defender extends Warrior{
+public class Defender extends Warrior {
     private int armor = 2;
 
     public Defender() {
@@ -17,12 +17,18 @@ public class Defender extends Warrior{
 
     @Override
     public Warrior equipWeapon(Weapon weapon) {
-        setArmor(Math.max(0, getArmor() + weapon.getArmor()));
+        weaponBuilder.addArmor(weapon.getArmor());
         return super.equipWeapon(weapon);
     }
 
     @Override
-    public void receiveDamage(HasStrength damager){
+    protected void onWeaponsEquipped(Weapon weapon) {
+        setArmor(Math.max(0, getArmor() + weapon.getArmor()));
+        super.onWeaponsEquipped(weapon);
+    }
+
+    @Override
+    public void receiveDamage(HasStrength damager) {
         int reducedDamage = Math.max(0, damager.getStrength() - getArmor());
         super.receiveDamage(() -> reducedDamage);
     }

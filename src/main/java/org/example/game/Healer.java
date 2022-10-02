@@ -17,10 +17,16 @@ public class Healer extends Warrior implements CanProcessCommand {
 
     @Override
     public Warrior equipWeapon(Weapon weapon) {
-        setInitialHealth(Math.max(0, getInitialHealth() + weapon.getHealth()));
-        setHealth(Math.max(0, getHealth() + weapon.getHealth()));
-        setHealingValue(Math.max(0, getHealingValue() + weapon.getHealPower()));
+        weaponBuilder.addHealth(weapon.getHealth())
+                .addHealPower(weapon.getHealPower());
         return this;
+    }
+
+    @Override
+    protected void onWeaponsEquipped(Weapon weapon) {
+        setInitialHealth(Math.max(1, getInitialHealth() + weapon.getHealth()));
+        setHealth(Math.max(1, getHealth() + weapon.getHealth()));
+        setHealingValue(Math.max(0, getHealingValue() + weapon.getHealPower()));
     }
 
     @Override

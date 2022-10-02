@@ -1,10 +1,12 @@
 package org.example.game;
 
 
-public class Warrior implements Cloneable, HasHealth, HasStrength, CanReceiveDamage{
+public class Warrior implements Cloneable, HasHealth, HasStrength, CanReceiveDamage {
     private int strength;
     private int health;
     private int initialHealth;
+
+    protected final Weapon.Builder weaponBuilder = Weapon.builder();
 
     protected Warrior(int health, int strength) {
         initialHealth = this.health = health;
@@ -45,15 +47,22 @@ public class Warrior implements Cloneable, HasHealth, HasStrength, CanReceiveDam
         setHealth(getHealth() - damager.getStrength());
     }
 
-    protected int calculateBonus(int bonus) {
-        int res = 0;
-        return res + bonus;
+    public Warrior equipWeapon(Weapon weapon) {
+        weaponBuilder
+                .addHealth(weapon.getHealth())
+                .addStrength(weapon.getStrength());
+        return this;
     }
 
-    public Warrior equipWeapon(Weapon weapon) {
+    protected void onWeaponsEquipped(Weapon weapon) {
         setInitialHealth(Math.max(1, getInitialHealth() + weapon.getHealth()));
         setHealth(Math.max(1, getHealth() + weapon.getHealth()));
         setStrength(Math.max(0, getStrength() + weapon.getStrength()));
+    }
+
+    public final Warrior prepareForBattle() {
+        Weapon weapon = weaponBuilder.build();
+        onWeaponsEquipped(weapon);
         return this;
     }
 
@@ -62,6 +71,7 @@ public class Warrior implements Cloneable, HasHealth, HasStrength, CanReceiveDam
         try {
             return (Warrior) super.clone();
         } catch (CloneNotSupportedException e) {
+            // Nothing
         }
         throw new IllegalStateException("Never should get here!");
     }

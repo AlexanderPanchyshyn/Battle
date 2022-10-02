@@ -2,18 +2,18 @@ package org.example.game;
 
 public interface Ammunition {
     static Weapon Sword() {
-        return Weapon.builder().health(5).strength(2).build();
+        return Weapon.builder().addHealth(5).addStrength(2).build();
     }
     static Weapon Shield() {
-        return Weapon.builder().health(20).strength(-1).armor(2).build();
+        return Weapon.builder().addHealth(20).addStrength(-1).addArmor(2).build();
     }
     static Weapon GreatAxe() {
-        return Weapon.builder().health(-15).strength(5).armor(-2).vampirism(10).build();
+        return Weapon.builder().addHealth(-15).addStrength(5).addArmor(-2).addVampirism(10).build();
     }
     static Weapon Katana() {
-        return Weapon.builder().health(-20).strength(6).armor(-5).vampirism(50).build();
+        return Weapon.builder().addHealth(-20).addStrength(6).addArmor(-5).addVampirism(50).build();
     }
     static Weapon MagicWand() {
-        return Weapon.builder().health(30).strength(3).healPower(3).build();
+        return Weapon.builder().addHealth(30).addStrength(3).addHealPower(3).build();
     }
 }
