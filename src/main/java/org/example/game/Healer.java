@@ -40,7 +40,10 @@ public class Healer extends Warrior implements CanProcessCommand {
 
     public void processCommand(Command command, WarriorInArmy sender) {
         if (command instanceof HealCommand) {
-            heal(sender.getWrapped());
+            var firstUnit = sender.getArmy().unitAtPosition(0);
+            if (firstUnit.getClass() != Healer.class ) {
+                heal(sender.getWrapped());
+            }
         }
     }
 }

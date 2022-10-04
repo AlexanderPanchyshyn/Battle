@@ -6,17 +6,25 @@ import org.example.game.*;
 
 public class Main {
     public static void main(String[] args) {
-        var army1 = new Army().addUnits(Healer::new, 1).addUnits(Lancer::new, 2).addUnits(Warlord::new, 1).addUnits(Warrior::new, 1);
-        var army2 = new Army().addUnits(Warrior::new, 10);
+        var myArmy = new Army().addUnits(Warlord::new, 1)
+                .addUnits(Warrior::new, 2)
+                .addUnits(Lancer::new, 2)
+                .addUnits(Healer::new, 2);
+        var enemyArmy = new Army().addUnits(Warlord::new, 3)
+                .addUnits(Vampire::new, 1)
+                .addUnits(Healer::new, 2)
+                .addUnits(Knight::new, 2);
 
-        Battle.fight(army1, army2);
+        myArmy.moveUnits();
+        enemyArmy.moveUnits();
 
-//        var war1 = new Defender();
-//        var war2 = new Vampire();
-//
-//        war1.equipWeapon(Ammunition.MagicWand()).equipWeapon(Ammunition.Shield()).prepareForBattle();
-//        war2.equipWeapon(Ammunition.Katana()).equipWeapon(Ammunition.GreatAxe()).prepareForBattle();
-//
-//        Battle.fight(war1, war2);
+//        System.out.println(myArmy.unitAtPosition(0).getClass() == Lancer.class);
+//        System.out.println(myArmy.unitAtPosition(1).getClass() == Healer.class);
+//        System.out.println(myArmy.unitAtPosition(myArmy.getSize() - 1).getClass() == Warlord.class);
+//        System.out.println(enemyArmy.unitAtPosition(0).getClass() == Vampire.class);
+//        System.out.println(enemyArmy.unitAtPosition(myArmy.getSize()).getClass() == Warlord.class);
+////        System.out.println(enemyArmy.unitAtPosition(myArmy.getSize() - 1).getClass() == Knight.class);
+//        System.out.println(enemyArmy.getSize() == 6);
+        System.out.println(Battle.fight(myArmy, enemyArmy));
     }
 }

@@ -10,13 +10,6 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class Rookie extends Warrior {
-    @Override
-    public int getStrength() {
-        return 1;
-    }
-}
-
 class BattleTest {
 
     @Test

@@ -5,6 +5,7 @@ import java.util.Optional;
 public interface WarriorInArmy extends CanProcessCommand{
     Warrior getWrapped();
     WarriorInArmy getNextBehind();
+    Army getArmy();
 
     default void processCommand(Command command, WarriorInArmy sender) {
         if (getWrapped() instanceof CanProcessCommand wrapped) {

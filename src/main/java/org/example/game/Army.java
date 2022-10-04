@@ -8,6 +8,10 @@ public class Army implements Iterable<Warrior> {
     private Warlord warlord;
     private int size;
 
+    public int getSize() {
+        return size;
+    }
+
     private class Node extends Warrior implements WarriorInArmy {
         Warrior warrior;
         Node next;
@@ -20,6 +24,11 @@ public class Army implements Iterable<Warrior> {
         @Override
         public WarriorInArmy getNextBehind() {
             return next == head ? null : next;
+        }
+
+        @Override
+        public Army getArmy() {
+            return Army.this;
         }
 
         @Override
@@ -120,6 +129,18 @@ public class Army implements Iterable<Warrior> {
         pos.warrior.equipWeapon(weapon).prepareForBattle();
 
         return this;
+    }
+
+    public Warrior unitAtPosition(int position) {
+        int i = 0;
+        Node pos = head.next;
+
+        while (i < position) {
+            pos = pos.next;
+            i++;
+        }
+
+        return pos.warrior;
     }
 
     public void moveUnits() {
