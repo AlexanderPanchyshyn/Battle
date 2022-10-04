@@ -5,6 +5,8 @@ import java.util.function.Supplier;
 
 
 public class Army implements Iterable<Warrior> {
+    private Warlord warlord;
+    private int size;
 
     private class Node extends Warrior implements WarriorInArmy {
         Warrior warrior;
@@ -75,17 +77,35 @@ public class Army implements Iterable<Warrior> {
         node.next = head;
         tail.next = node;
         tail = node;
+        size++;
     }
 
     public Army addUnits(Supplier<Warrior> factory, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            addToTail(factory.get());
+            Warrior warrior = factory.get();
+            if (warrior instanceof Warlord) {
+                if (warlord == null) {
+                    warlord = (Warlord) warrior;
+                } else {
+                    break;
+                }
+            }
+            addToTail(warrior);
         }
         return this;
     }
 
+
+
     public void addSeducedUnit(Warrior warrior) {
         addToTail(warrior);
+    }
+
+    private Army addSwappedUnits(Supplier<Warrior> factory, int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            addToTail(factory.get());
+        }
+        return this;
     }
 
     public Army equipWarriorAtPosition(int position, Weapon weapon) {
@@ -102,46 +122,22 @@ public class Army implements Iterable<Warrior> {
         return this;
     }
 
-    public Army moveUnits() {
-        for (Warrior warrior : this) {
-            if (warrior instanceof Warlord warlord) {
-                warlord.replaceUnits(this);
+    public void moveUnits() {
+        if (warlord != null && !warlord.isAlive()) {
+            warlord = null;
+        }
+        if (warlord != null) {
+            Iterable<Warrior> newArrangement = warlord.moveUnits(iterator());
+            clear();
+            for (var warrior : newArrangement) {
+                addSwappedUnits(() -> warrior, 1);
             }
         }
-        return this;
     }
 
-    public Army changePosition(Warrior warrior, int positionPreferred) {
-        int i = 0;
-
-        Node previousWarInsert = head;
-        Node warriorInsert = head.next;
-        Node nextWarInsert = head.next.next;
-
-        Node previousWarInPrefPos = head;
-        Node warriorInPreferredPosition = head.next;
-        Node nextWarInPrefPos = head.next.next;
-
-        while (!warrior.equals(warriorInsert)) {
-            previousWarInsert = warriorInsert;
-            warriorInsert = warriorInsert.next;
-            nextWarInsert = warriorInsert.next;
-        }
-
-        while (i < positionPreferred) {
-            previousWarInPrefPos = warriorInPreferredPosition;
-            warriorInPreferredPosition = warriorInPreferredPosition.next;
-            nextWarInPrefPos = warriorInPreferredPosition.next;
-            i++;
-        }
-
-        previousWarInsert.next = warriorInPreferredPosition;
-        previousWarInPrefPos.next = warriorInsert;
-
-        warriorInsert.next = nextWarInPrefPos;
-        warriorInPreferredPosition.next = nextWarInsert;
-
-        return this;
+    private void clear() {
+        tail = head.next = head;
+        size = 0;
     }
 
     public Iterator<Warrior> firstAlive() {
@@ -177,6 +173,7 @@ public class Army implements Iterable<Warrior> {
                 tail = head;
             }
             head.next = head.next.next;
+            size--;
         }
     }
 

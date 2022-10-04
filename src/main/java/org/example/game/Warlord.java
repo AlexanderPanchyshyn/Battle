@@ -1,50 +1,43 @@
 package org.example.game;
 
-public class Warlord extends Warrior {
-    private int armor = 2;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
+import static java.util.function.Predicate.not;
+
+public class Warlord extends Defender {
     public Warlord() {
-        super(100, 4);
+        setInitialHealth(100);
+        setHealth(100);
+        setStrength(4);
+        setArmor(2);
     }
 
-    public int getArmor() {
-        return armor;
-    }
-
-    protected void setArmor(int armor) {
-        this.armor = armor;
-    }
-
-    @Override
-    public Warrior equipWeapon(Weapon weapon) {
-        weaponBuilder.addArmor(weapon.getArmor());
-        return super.equipWeapon(weapon);
-    }
-
-    @Override
-    protected void onWeaponsEquipped(Weapon weapon) {
-        setArmor(Math.max(0, getArmor() + weapon.getArmor()));
-        super.onWeaponsEquipped(weapon);
-    }
-
-    public Army replaceUnits(Army myArmy) {
-        var it = myArmy.iterator();
-        int armySize = 0;
-
-        for (Warrior ignored : myArmy) {
-            armySize++;
+    public Iterable<Warrior> moveUnits(Iterator<Warrior> iterator) {
+        List<Warrior> list = new ArrayList<>();
+        while (iterator.hasNext()) {
+            list.add(iterator.next());
         }
 
-        System.out.println("Army size = " + armySize);
+        var lancers = list.stream()
+                .filter(Lancer.class::isInstance)
+                .toList();
+        var healers = list.stream()
+                .filter(Healer.class::isInstance)
+                .toList();
+        var otherUnits = list.stream()
+                .filter(not(Lancer.class::isInstance))
+                .filter(not(Healer.class::isInstance))
+                .filter(not(Warlord.class::isInstance))
+                .toList();
 
-        while (true) {
-            if (it.next() instanceof Warlord) {
-                myArmy.changePosition(it.next(), armySize - 1);
-            } else {
-                break;
-            }
-        }
+        List<Warrior> out = new ArrayList<>();
+        out.addAll(lancers);
+        out.addAll(otherUnits);
+        out.addAll(Math.min(out.size(), 1), healers);
+        out.add(this);
 
-        return myArmy;
+        return out;
     }
 }

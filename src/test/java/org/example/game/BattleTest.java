@@ -278,6 +278,65 @@ class BattleTest {
         );
     }
 
+    @ParameterizedTest
+    @MethodSource
+    @DisplayName("StraightFight")
+    void checkStraightFightResults(Army army_1, Army army_2, boolean expected) {
+        var res = Battle.straightFight(army_1, army_2);
+        assertEquals(expected, res);
+    }
+
+    static Stream<Arguments> checkStraightFightResults() {
+        return Stream.of(
+                Arguments.of(new Army().addUnits(Warrior::new, 10),
+                        new Army().addUnits(Warrior::new, 6)
+                                .addUnits(Lancer::new, 5),
+                        false),
+                Arguments.of(new Army().addUnits(Lancer::new, 5)
+                                .addUnits(Vampire::new, 3)
+                                .addUnits(Warrior::new, 4)
+                                .addUnits(Defender::new, 2),
+                        new Army().addUnits(Warrior::new, 4)
+                                .addUnits(Defender::new, 4)
+                                .addUnits(Vampire::new, 6)
+                                .addUnits(Lancer::new, 5),
+                        false),
+                Arguments.of(new Army().addUnits(Lancer::new, 7)
+                                .addUnits(Vampire::new, 3)
+                                .addUnits(Warrior::new, 4)
+                                .addUnits(Defender::new, 2),
+                        new Army().addUnits(Warrior::new, 4)
+                                .addUnits(Defender::new, 4)
+                                .addUnits(Vampire::new, 6)
+                                .addUnits(Lancer::new, 4),
+                        true),
+                Arguments.of(new Army().addUnits(Lancer::new, 7)
+                                .addUnits(Vampire::new, 3)
+                                .addUnits(Healer::new, 1)
+                                .addUnits(Warrior::new, 4)
+                                .addUnits(Healer::new, 1)
+                                .addUnits(Defender::new, 2),
+                        new Army().addUnits(Warrior::new, 4)
+                                .addUnits(Defender::new, 4)
+                                .addUnits(Healer::new, 1)
+                                .addUnits(Vampire::new, 6)
+                                .addUnits(Lancer::new, 4),
+                        false),
+                Arguments.of(new Army().addUnits(Lancer::new, 4)
+                                .addUnits(Warrior::new, 3)
+                                .addUnits(Healer::new, 1)
+                                .addUnits(Warrior::new, 4)
+                                .addUnits(Healer::new, 1)
+                                .addUnits(Knight::new, 2),
+                        new Army().addUnits(Warrior::new, 4)
+                                .addUnits(Defender::new, 4)
+                                .addUnits(Healer::new, 1)
+                                .addUnits(Vampire::new, 2)
+                                .addUnits(Lancer::new, 4),
+                        true)
+        );
+    }
+
     @Test
     @DisplayName("Battle with Defenders. Smoke Test")
     void smokeTest3() {
