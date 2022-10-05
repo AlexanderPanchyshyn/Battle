@@ -16,6 +16,13 @@ public class Vampire extends Warrior implements KnowsDamageDealt {
     }
 
     @Override
+    public void hit(CanReceiveDamage opponent) {
+        int damageDealt = hitAndReportDamage(opponent);
+        int healMyselfBy = damageDealt * vampirism / 100;
+        setHealth(getHealth() + healMyselfBy);
+    }
+
+    @Override
     public Warrior equipWeapon(Weapon weapon) {
         weaponBuilder.addVampirism(weapon.getVampirism());
         return super.equipWeapon(weapon);
@@ -25,13 +32,5 @@ public class Vampire extends Warrior implements KnowsDamageDealt {
     protected void onWeaponsEquipped(Weapon weapon) {
         setVampirism(Math.max(0, getVampirism() + weapon.getVampirism()));
         super.onWeaponsEquipped(weapon);
-    }
-
-    @Override
-    public void hit(CanReceiveDamage opponent) {
-        int damageDealt = hitAndReportDamage(opponent);
-        final int percents = 100;
-        int healMyselfBy = damageDealt * vampirism / percents;
-        setHealth(getHealth() + healMyselfBy);
     }
 }

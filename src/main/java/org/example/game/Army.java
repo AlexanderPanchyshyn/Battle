@@ -104,17 +104,12 @@ public class Army implements Iterable<Warrior> {
         return this;
     }
 
-
-
     public void addSeducedUnit(Warrior warrior) {
         addToTail(warrior);
     }
 
-    private Army addSwappedUnits(Supplier<Warrior> factory, int quantity) {
-        for (int i = 0; i < quantity; i++) {
-            addToTail(factory.get());
-        }
-        return this;
+    private void addSwappedUnits(Supplier<Warrior> factory) {
+        addToTail(factory.get());
     }
 
     public Army equipWarriorAtPosition(int position, Weapon weapon) {
@@ -151,7 +146,7 @@ public class Army implements Iterable<Warrior> {
             Iterable<Warrior> newArrangement = warlord.moveUnits(iterator());
             clear();
             for (var warrior : newArrangement) {
-                addSwappedUnits(() -> warrior, 1);
+                addSwappedUnits(() -> warrior);
             }
         }
     }

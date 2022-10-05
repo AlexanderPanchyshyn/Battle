@@ -71,7 +71,7 @@ public class Warrior implements Cloneable, HasHealth, HasStrength, CanReceiveDam
         try {
             return (Warrior) super.clone();
         } catch (CloneNotSupportedException e) {
-            // Nothing
+            System.out.println("This object's class does not implement the Cloneable interface.");
         }
         throw new IllegalStateException("Never should get here!");
     }

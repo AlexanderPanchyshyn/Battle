@@ -2,8 +2,6 @@
 Z
 *src/main/java/org/example/game/Damage.java,3\f\3ff2ffad4182c5901bf244bebca93b64fa0e47b7
 d
-4src/main/java/org/example/game/KnowsDamageDealt.java,e\8\e8b54014ee6811c62a4575553243abc7f7b7dd47
-d
 4src/main/java/org/example/game/CanReceiveDamage.java,6\5\65cd22d5254fa83dca5263aec0549bde52c67767
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
@@ -15,5 +13,3 @@ w
 G.idea/sonarlint/issuestore/6/5/65cd22d5254fa83dca5263aec0549bde52c67767,1\1\11cff5fddf7cbc040cc059513938bdd93d41aebd
 Z
 *src/main/java/org/example/game/Knight.java,1\e\1e8cb6483b4c202eedbeb8e0f398b755eddbc4da
-Z
-*src/main/java/org/example/game/Lancer.java,3\5\3548f3cb4851039caa09437145f61d39dae07645

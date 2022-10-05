@@ -5,7 +5,6 @@ public interface KnowsDamageDealt extends HasStrength {
         int opponentHealthBeforeAttack = opponent.getHealth();
         HasStrength.super.hit(opponent);
         int opponentHealthAfterAttack = opponent.getHealth();
-        int damageDealt = opponentHealthBeforeAttack - opponentHealthAfterAttack;
-        return damageDealt;
+        return opponentHealthBeforeAttack - opponentHealthAfterAttack;
     }
 }
