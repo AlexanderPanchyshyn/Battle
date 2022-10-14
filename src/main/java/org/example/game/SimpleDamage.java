@@ -3,7 +3,7 @@ package org.example.game;
 import java.util.Objects;
 
 public class SimpleDamage implements Damage {
-    private int value;
+    private final int value;
     Warrior damageDealer;
 
     public SimpleDamage(int value, Warrior damageDealer) {
